@@ -1,6 +1,6 @@
-const WebSocket = require('faye-websocket')
-const EventSource = WebSocket.EventSource
 const http = require('http')
+const WebSocket = require('faye-websocket')
+const _remove = require('lodash/remove')
 
 const server = http.createServer((req, res) => {
     console.log('ws running!')
@@ -10,7 +10,7 @@ let clients = []
 
 server.on('upgrade', (request, socket, body) => {
     if (WebSocket.isWebSocket(request)) {
-        let ws = new WebSocket(request, socket, body)
+        const ws = new WebSocket(request, socket, body)
 
         clients.push(ws)
 
@@ -20,12 +20,12 @@ server.on('upgrade', (request, socket, body) => {
 
         ws.on('message', e => {
             const msg = e.data
-            clients.forEach(c => c.send(msg))
+            clients.forEach(client => client.send(msg))
         })
 
-        ws.on('close', event => {
-            console.log('[close]', event.code, event.reason)
-            ws = null
+        ws.on('close', e => {
+            console.log('[close]', e.code, e.reason)
+            _remove(clients, client => client === ws)
         })
     }
 })

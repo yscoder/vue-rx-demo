@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import mutations from './mutations'
 import actions from './actions'
-import ws from './ws'
-import client from '../client'
+import wsPlugin from './wsPlugin'
+import socket from '../client'
 
 Vue.use(Vuex)
 
@@ -18,5 +18,5 @@ export default new Vuex.Store({
             return state.msgList
         }
     },
-    plugins: [ws(client)]
+    plugins: [wsPlugin(socket)]
 })

@@ -1,16 +1,8 @@
 import API from '../api'
 import { Observable } from 'rxjs/Observable'
-import ws from '../client'
+import socket from '../client'
 
-ws.addEventListener('open', () => {
-    console.log('WS已打开!')
-})
-
-ws.addEventListener('close', () => {
-    console.log('WS关闭')
-})
-
-ws.addEventListener('message', e => {
+socket.addEventListener('message', e => {
     console.log(e.data)
     setItem(JSON.parse(e.data))
 })
@@ -31,6 +23,6 @@ const setItem = item => {
 }
 
 export const send = item => {
-    ws.send(JSON.stringify(item))
+    socket.send(JSON.stringify(item))
 }
 
