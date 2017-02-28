@@ -1,28 +1,34 @@
 import API from '../api'
 import { Observable } from 'rxjs/Observable'
-import socket from '../client'
+// import { Subject } from 'rxjs/Subject'
+// import socket from '../client'
 
-socket.addEventListener('message', e => {
-    console.log(e.data)
-    setItem(JSON.parse(e.data))
-})
+import 'rxjs/add/observable/fromPromise'
+import 'rxjs/add/observable/dom/webSocket'
+import 'rxjs/add/observable/of'
+import 'rxjs/add/operator/merge'
+import 'rxjs/add/observable/range'
+import 'rxjs/add/operator/mergeAll'
+import 'rxjs/add/operator/toArray'
 
-// const _CACHE = {}
+let source$ = Observable.fromPromise(API.getMsgs().then(data => data.list))
+let added$ = Observable.webSocket('ws://localhost:3300')
+added$.subscribe(
+    (msg) => {
+        console.log(msg)
+    },
+    (err) => console.log(err),
+    () => console.log('complete')
+)
 
-const reducer = (state, payload) => {
-    return state.concat(payload)
-}
-
-export const data$ = Observable.fromPromise(API.getMsgs().then(data => {
-    return data.list
-})).merge(reducer)
-
-const setItem = item => {
-    // data$ = data$.concat(item)
-    // console.log(_CACHE.msgList$)
-}
+export const data$ = Observable.of(source$, added$).toArray()
+// console.log(data$)
 
 export const send = item => {
-    socket.send(JSON.stringify(item))
+    added$.next(JSON.stringify(item))
 }
 
+// socket.addEventListener('message', e => {
+//     console.log(e.data)
+//     added$.next(JSON.parse(e.data))
+// })

@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "start http://localhost:3000 & cross-env NODE_ENV=dev supervisor -w config -i src config/dev-server.js",
     "build": "node config/build.js",
-    "ws": "node config/ws-server.js"
+    "ws": "node config/ws-server.js",
+    "start": "npm run ws | npm run dev"
   },
   "dependencies": {
     "faye-websocket": "^0.11.1",

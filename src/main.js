@@ -1,14 +1,12 @@
 import Vue from 'vue'
-import VueResource from 'vue-resource'
 import App from './App'
 import router from './router'
 import store from './store'
 
 import Rx from 'rxjs/Rx'
 import VueRx from 'vue-rx'
-Vue.use(VueRx, Rx)
 
-Vue.use(VueResource)
+Vue.use(VueRx, Rx)
 
 export default new Vue({
     el: '#app',

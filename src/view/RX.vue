@@ -1,23 +1,22 @@
 <template>
-    <chat :list="msgList" @on-send="sendMsg"></chat>
+    <chat :list="data$" @on-send="sendMsg"></chat>
 </template>
 <script>
-import chat from 'components/chat'
-import { data$, send } from '../service/chatService'
+    import chat from 'components/chat'
+    import { data$, send } from '../service/chatService'
 
-export default {
-    components: {
-        chat
-    },
-    methods: {
-        sendMsg(msg) {
-            send(msg)
-        }
-    },
-    subscriptions() {
-        return {
-            msgList: data$
+    export default {
+        components: {
+            chat
+        },
+        methods: {
+            sendMsg(msg) {
+                send(msg)
+            }
+        },
+        subscriptions: {
+            data$
         }
     }
-}
+
 </script>

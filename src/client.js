@@ -1,4 +1,4 @@
-const socket = new WebSocket('ws://localhost:3300')
+const socket = new WebSocket('ws://localhost:3400')
 
 socket.addEventListener('open', () => {
     console.log('WS已打开!')
