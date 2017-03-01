@@ -5,10 +5,10 @@
 ## start
 
 ```bash
-# dev server
+# dev server, http://localhost:3000
 $ npm run dev
 
-# websocket server
+# websocket server, ws://localhost:3300
 $ npm run ws
 
 # dev server && websocket server

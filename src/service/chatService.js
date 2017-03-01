@@ -6,9 +6,9 @@ import 'rxjs/add/observable/fromPromise'
 import 'rxjs/add/observable/dom/webSocket'
 import 'rxjs/add/observable/of'
 
-let cache = {}
+const cache = {}
 
-let added$ = Observable.webSocket('ws://localhost:3300')
+const added$ = Observable.webSocket('ws://localhost:3300')
 added$.subscribe(
     msg => {
         console.log('[RX]: subscribe ', msg)
