@@ -6,7 +6,7 @@ export default {
 
     },
     addMsg(state, data) {
-        console.log(data)
+        console.log('[Vuex]: submit ', data)
         state.msgList.push(data)
     }
 }

@@ -27,6 +27,7 @@
                     content: this.msg,
                     name: this.name
                 })
+                this.clear()
             },
             clear() {
                 this.msg = ''

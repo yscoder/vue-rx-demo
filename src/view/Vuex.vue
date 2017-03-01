@@ -9,6 +9,7 @@ export default {
     },
     methods: {
         sendMsg(msg) {
+            console.log('[Vuex]: dispatch ', msg)
             this.$store.dispatch('sendMsg', msg)
         }
     },

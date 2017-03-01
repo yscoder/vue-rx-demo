@@ -1,6 +1,7 @@
 const http = require('http')
 const WebSocket = require('faye-websocket')
 const _remove = require('lodash/remove')
+const Mock = require('mockjs')
 
 const server = http.createServer((req, res) => {
     console.log('ws running!')
@@ -19,7 +20,9 @@ server.on('upgrade', (request, socket, body) => {
         })
 
         ws.on('message', e => {
-            const msg = e.data
+            const msg = JSON.stringify(Object.assign({}, JSON.parse(e.data), {
+                uid: Mock.mock('@id')
+            }))
             clients.forEach(client => client.send(msg))
         })
 
