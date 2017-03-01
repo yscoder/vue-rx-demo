@@ -1,9 +1,9 @@
 <template>
-    <chat :list="data$" @on-send="sendMsg"></chat>
+    <chat :list="data" @on-send="sendMsg"></chat>
 </template>
 <script>
 import chat from 'components/chat'
-import { data$, send } from '../service/chatService'
+import { getData, send } from '../service/chatService'
 export default {
     components: {
         chat
@@ -15,7 +15,7 @@ export default {
         }
     },
     subscriptions: {
-        data$: data$()
+        data: getData()
     }
 }
 </script>

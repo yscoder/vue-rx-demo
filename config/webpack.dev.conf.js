@@ -30,7 +30,7 @@ module.exports = merge(baseConfig, {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         new HtmlWebpackPlugin({
-            title: 'BCMP',
+            title: 'Vue-demo',
             filename: 'index.html',
             template: '!!ejs!src/index.html',
             NODE_ENV: 'dev',

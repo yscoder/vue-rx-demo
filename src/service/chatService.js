@@ -18,7 +18,7 @@ added$.subscribe(
     () => console.log('complete')
 )
 
-export const data$ = () => cache.list ? Observable.of(cache.list) : Observable.fromPromise(API.getMsgs().then(data => {
+export const getData = () => cache.list ? Observable.of(cache.list) : Observable.fromPromise(API.getMsgs().then(data => {
     cache.list = data.list
     return cache.list
 }))
