@@ -1,13 +1,16 @@
-import Vue from 'vue'
-import VueResource from 'vue-resource'
+import axios from 'axios'
 
-Vue.use(VueResource)
+const Ajax = axios.create({
+    // baseURL: 'https://some-domain.com/api/',
+    // timeout: 1000,
+    // headers: { 'X-Custom-Header': 'foobar' }
+})
 
-const TO_JSON = res => res.json()
+const TO_JSON = res => res.data
 const ERROR_HANDLE = res => console.error('ERROR: ', res.status, res.statusText)
 
 const HTTP = (method, args) => {
-    return Vue.http[method].apply(Vue.http, args).then(TO_JSON, ERROR_HANDLE)
+    return Ajax[method].apply(Ajax, args).then(TO_JSON, ERROR_HANDLE)
 }
 
 export const GET = (...args) => HTTP('get', args)
